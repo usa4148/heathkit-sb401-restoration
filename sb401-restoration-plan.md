@@ -1,6 +1,6 @@
 ---
 title: "Heathkit SB-401 Transmitter — Restoration Plan"
-subtitle: "Rev. 1.1 — built from the Heath manual (595-947-10), service bulletins and field sources"
+subtitle: "Rev. 1.3 — built from the Heath manual (595-947-10), service bulletins and field sources"
 date: "November 2026"
 geometry: margin=0.9in
 fontsize: 10pt
@@ -23,8 +23,10 @@ toc: true
 
 | Document | Where | Use |
 |---|---|---|
-| **Heath SB-401 Assembly and Operation Manual** ("Condensed Manual"), 595-947-10 (©1966; schematic dated 8-2-68) | Internet Archive, item `assemblyoperatio00unse_0` (Ron Patterson W6FM / DLARC collection) | **Primary reference.** Parts lists #1–#5, initial test (pp. 87–90), alignment (pp. 90–97), tune-up charts (pp. 114–116), in-case-of-difficulty and troubleshooting chart (pp. 117–120), specifications (pp. 121–123). |
-| **Heath SB-401 service bulletins** (SB-401-1D through SB-401-16; SB-400-1/2/3) | Heath mailing list, 1997 transcription (Joe Lutz) and 2014 repost (Van Lincoln WD8AAM); nostalgickitscentral.com | Factory-documented fixes. Indexed in §5.2. |
+| **Heath SB-401 Assembly and Operation Manual**, 595-947-xx (©1966; schematic dated 8-2-68). Two copies were used: the **full 88-page image scan supplied by the owner** (`sb-401.pdf`, pp. 1–154 plus the fold-out schematic), and the archive.org OCR text of the "Condensed Manual" 595-947-10 | Owner's scan; Internet Archive item `assemblyoperatio00unse_0` (Ron Patterson W6FM / DLARC collection) | **Primary reference.** Parts lists #1–#5, initial test (pp. 87–90), alignment (pp. 90–97), tune-up charts (pp. 114–116), in-case-of-difficulty and troubleshooting chart (pp. 117–120), specifications (pp. 121–123), **circuit description with the power-supply and metering figures (pp. 125–138)**, X-ray views (pp. 139–140), **voltage and resistance charts (pp. 145–146)**, **LMO schematic (p. 147)**, replacement parts price list (pp. 148–154), and the **full schematic**. |
+| **Heath SB-401 service bulletins** (SB-401-1D through SB-401-16; SB-400-1/2/3) | Heath mailing list: 1997 and June 1998 transcriptions (Joe Lutz W7LPF; the 1998 post is the one AF6C links, retitled "Complete 1966-89") and 2014 repost (Van Lincoln WD8AAM); nostalgickitscentral.com | Factory-documented fixes. Indexed in §5.2. |
+| W2JDL, "The Heathkit SB401 Transmitter," *73 Magazine*, July 1967, pp. 98–100 | PDF supplied by owner | Contemporary build-and-review: circuit walk-through, SB-400 comparison, the 680 Ω finals resistor, RG-62 interconnect cables, and the CW/transceive switch setting. |
+| Heathkit group (groups.io), "SB 401 is here and the...", May 2024 (AF6C, WB4GRA, W7EKB, KB2QIU) | Pasted by owner (page 2 of 3 only) | Crystal list for the SBA-401-1 pack and the seven "undo" steps for running the manual's Initial Test on a built unit (§4.1). |
 | AF6C, *Heathkit of the Month #43: SB-401* (Oct. 2012) | w6ze.org/Heathkit/Heathkit_043_SB401.pdf | Circuit description, SB-400 vs SB-401 differences, tube line-up, serial/date notes, the RL-2 hang-up fix. |
 | *Heathkit SB-401 Amateur Transmitter* restoration (Feb. 2021) | heathkit-interests.blogspot.com | Replacement electrolytics, resistor drift measurements, the P.E.C. network. |
 | *SB-301/SB-401 Functional Repair Guidelines* thread (Oct. 2010: WB4LNM, WA2CKY, K9STH, W7EKB) | puck.nether.net/pipermail/heath | Practical recap order, grounds, cables, power cord. |
@@ -35,7 +37,7 @@ toc: true
 | **Heathkit-Radios** (groups.io), "sb-401 lmo," Apr. 29 – May 2, 2026 (messages 22979–22994) | Pasted by owner | One SB-401 LMO fault and its fix (§3.5, §5.1). *The rest of the group was not searched (§11).* |
 | EEVblog forum, antiqueradios.com thread t=422212 | eevblog.com, antiqueradios.com | *Not retrieved for this revision (§11).* |
 
-**Manual page references use the manual's printed page numbers.** The archive.org scan is an OCR text layer; the voltage and resistance chart fold-outs (manual pp. 145–146) and the schematic do not survive as readable text. Where this plan needs those, it says so.
+**Manual page references use the manual's printed page numbers.** The owner's scan is image-only, so figures and chart values in this revision were read by eye from the page images (the archive.org copy has an OCR text layer only, and the charts and schematic do not survive in it). Values read from the voltage chart are marked as such and should be confirmed on the page before you condemn a part.
 
 **Numbering scheme (schematic note 1):** 0–99 chassis parts; 100–199 carrier generator board; 200–299 mixer-bandpass board; 300–399 terminal board #1; 400–499 terminal board #2. Resistors are 1/2 W unless marked. The SB-400 uses *different* designators (for example R71 on the SB-400 is R402 on the SB-401), so do not mix SB-400 and SB-401 documents without a cross-reference.
 
@@ -89,7 +91,7 @@ Production and price: first shipments Sept. 1966; kit price **$285** (Radio Elec
 
 | Source | SB-401 LMO |
 |---|---|
-| Heath manual 595-947-10 (parts list, pack #4) | **110-40**, V6 = 6BZ6 |
+| Heath manual (parts lists #3/#5 and price list p. 151: **"100-40" Linear master oscillator, $63.30**, with the LMO schematic p. 147 labelled **6BZ6**; the archive.org OCR misreads the number as 110-40) | **100-40**, V6 = 6BZ6 |
 | AF6C | 110-13 (SB-400); 110-32, then **110-40 from 1968**; both SB-401 versions 6BZ6 |
 | Bulletin SB-401-1D | 110-32 is no longer available; use **100-40-LMO** |
 | Kembel, Table 12 (p. 116) | SB-401 **110-32**, 6BZ6 (his table also lists the SB-101's 110-40 as 6CB6 and the SB-301's 110-40 as 6BZ6) |
@@ -103,6 +105,7 @@ Kembel's text distinguishes the two by construction: **110-32 has a large, thick
 - **Signal path (SSB):** mic → V1A preamp → V1B cathode follower → four-diode balanced modulator (carrier from V2) → V3 isolation amp (ALC acts here) → 3395 kHz crystal filter (404-283) → V4 mixes with the 5.0–5.5 MHz LMO (V6) → 8.395–8.895 MHz bandpass coupler → V5 mixes with the crystal heterodyne oscillator (V8) → band-switched driver V9 → 6146 pair → pi network.
 - **Crystal filter:** Heath **404-283** (smaller case; replaced the SB-400's 404-200). Kembel's table gives 2.1 kHz at −6 dB and 5 kHz at −60 dB, shared with the SB-301, SB-310 and SB-101 (p. 101). A secondhand 404-283 with a 30 dB passband dip had a broken PCB track inside (p. 105), so a filter that is dull or lossy is repairable.
 - **Carrier frequencies:** LSB 3393.6 kHz, USB 3396.4 kHz, CW **3395.4 kHz** (CW transmits 1 kHz above the dial frequency so the receiver beat note is 1 kHz). The USB and LSB crystals and the eight heterodyne crystals come from the receiver in transceive, or from the optional **SBA-401-1 crystal pack**. Only the CW crystal (Y10) ships with the kit.
+- **SBA-401-1 pack, as AF6C lists it:** ten crystals, 3393.6 kHz (LSB carrier), 3396.4 kHz (USB/CW carrier), and heterodyne crystals 12.395 (80 m), 15.895 (40 m), 22.895 (20 m), 29.895 (15 m), 36.895, 37.395, 37.895 and 38.395 MHz (the four 10 m segments). Subtract 8.895 MHz from a heterodyne crystal to get the dial frequency at LMO zero. The kit's own CW crystal is **404-215 (3395.4 kHz)**. The SB-301 also carries a 23.895 MHz crystal (15 MHz WWV) and a 3392.110 kHz RTTY crystal, which the transmitter does not use. W7EKB says the SB-401's crystals are the same as the SB-series transceivers', and WB4GRA says a **crystal switch board 85-132-1** from an SB-10x, with its crystals, works as a source.
 - **Heterodyne crystals (SBA-401-1):** Y1 38,395.0 · Y2 37,895.0 · Y3 37,395.0 · Y4 36,895.0 · Y5 29,895.0 · Y6 22,895.0 · Y7 15,895.0 · Y8 12,395.0 kHz; Y9 3396.4 USB; Y11 3393.6 LSB.
 - **Final:** two 6146s in parallel, class AB1. **Idle plate current about 50 mA total** (the manual's BIAS ADJUST step; ~25 mA each) at a bias of about **−50 V**. Standby cuts the tubes off by removing **screen voltage** (the grids sit at −170 V DC in STBY, manual p. 90).
 - **Tank:** 250 pF tuning cap; 245/245/354 pF three-gang loading cap; **100 pF and 200 pF** fixed loading caps added on 40 and 80 m; tapped silver-plated coil plus separate 10 m air coil. The 20/15/10 m settings use only the two 245 pF sections; 40/80 m use all three.
@@ -114,10 +117,34 @@ Kembel's text distinguishes the two by construction: **110-32 has a large, thick
 ## 2.4 Power supply (AF6C §1; manual parts lists)
 
 - **Transformer** 54-143 (early) or 54-198 (dual primary). Filaments are a 12.6 V centre-tapped winding: one half runs both 6146s and V9, the other half runs the rest of the tubes and the lamps.
-- **High voltage:** about 275 VAC into a full-wave doubler, **two 125 µF electrolytics (25-34)** in series, giving about **720 VDC at 250 mA** (about 800 V unloaded).
-- **Low voltage:** a tap near 95 VAC into a half-wave doubler, two large caps and a **4.5 H filter choke (46-43)**, giving about **250 V at 100 mA**. **V7 (OA2)** regulates the LMO and heterodyne oscillator at 150 V.
-- **Bias:** the full winding (about 125 VAC) through a capacitor-input RC filter gives **−170 VDC**; resistive dividers make the other negative bias voltages and the BIAS ADJUST range.
-- **Rectifiers:** silicon 57-27 (750 mA, 500 PIV). The manual lists 11 in the chassis kit plus 2 on the carrier board.
+Per the manual's Figure 6-15 (p. 136):
+
+- **High voltage:** the red / red-yellow secondary (about 275 VAC) feeds **D5–D8** in a full-wave doubler charging **C78 and C79, 125 µF each (25-34)**. **R44 and R45, 100 kΩ 2 W**, sit across them as bleeder/equalizers. Output **720 VDC at 250 mA full load**.
+- **Low voltage:** the brown / brown-yellow winding (**95 VAC**) feeds a half-wave doubler (**D3, D4, C81 100 µF**) into a pi filter: **C77A 40 µF, C77B 100 µF** (the 100-40 can, 25-59), **R41 100 kΩ 2 W** bleeder and the **4.5 H filter choke** (46-43). Output **250 VDC at 100 mA**. **V7 (OA2)** regulates the LMO and heterodyne oscillator at 150 V.
+- **Bias:** the blue winding (about 125 VAC) feeds **D2**, **C403 and C404 (20 µF each)** and **R412 (1000 Ω, 1 W)**. **−170 VDC no load**; dividers make the **−45 to −70 V** bias range and the other negative rails.
+- **Filaments:** a separate winding (yellow, green, yellow-green leads).
+- **Line:** 4 A slow-blow fuse in the primary; **C75 and C76, 0.005 µF 1.4 kV** line bypass; TV-style quick-disconnect line cord. The 240 V wiring uses a 2 A fuse.
+- **Rectifiers:** silicon 57-27 (750 mA, 500 PIV): D5–D8 high voltage, D3/D4 low voltage, D2 bias; others for VOX, ALC and DC blocking.
+
+**Metering figures (pp. 137–138):** GRID reads across **R33 4.7 kΩ** (RFC102 0.5 mH, C104 .005); PLATE across the cathode network with **R6 750 Ω**; ALC is a bridge across V3's cathode and screen (R117 33 kΩ, R119 68 kΩ, R116 2.2 kΩ, **R120 10 kΩ ALC ADJUST**); HV is **R43 500 kΩ in series with the meter, R42 10 kΩ shunt**, fed from the doubler centre tap, and "indicates 1000 volts full scale"; REL PWR is **D9** rectifying a sample taken through **R34 10 kΩ / R35 1 kΩ**, with **R36 600 Ω** (REL PWR ADJ) and C80 .005.
+
+## 2.5 Voltage chart readings (manual p. 145)
+
+Conditions (p. 146): FUNCTION **STBY**, BAND 3.5, MODE CW, DRIVER full CCW, FINAL LOAD 50 Ω, FINAL 80, LEVEL full CW, METER REL PWR, LMO 0, key open. VTVM readings; tolerance ±20%. *These were read from the scanned fold-out by eye; confirm them on the page before relying on them.*
+
+| Point | Reading |
+|---|---|
+| HV doubler output (strip H) | **about 831 V**; **about 450 V** at the mid-point |
+| HV winding (H) / other AC | **275 VAC**; about 116 VAC at strip J (line); 6.2–6.3 VAC filaments |
+| Low-voltage B+ | about **250–258 V** on strip AC and the V4/V9/V12 plate and screen circuits |
+| Regulated (V7 OA2) | **150 V** at both marked pins |
+| Bias rails | **−170 V** (strip AD lug 4); **−180 V** (strip L); **−181 V** at the V10/V11 grids (finals cut off in STBY) |
+| V9 (6CL6 driver) | about **−17 V** blocking bias on its grid circuit; plate circuit about 214–256 V |
+| V10/V11 screens and plates | **0 V in STBY** (screen voltage is removed) |
+| V4/V5 | plates about 230–253 V; V4 and V5 cathode about 1.5 V |
+| Terminal board #1 / #2 | −180, −17, 0, 254–255, 26 V at the marked lugs (see the chart for lug numbers) |
+
+The text of the initial test (p. 90) quotes **−170 V** at V10/V11 pin 5 and **800 V** on the HV meter position; the chart shows −181 V and about 831 V, which is the same within tolerance.
 
 # 3. What fails, ranked
 
@@ -129,10 +156,10 @@ Rankings combine the manual's circuit knowledge, the service bulletins and the f
 
 | Ref (part no.) | Value | Where | Replace with |
 |---|---|---|---|
-| 25-34 ×2 | **125 µF** | HV doubler (about 360–400 V each) | Two ≥ 450 V, 105 °C; the 2021 blog used a 100 µF 450 V and a 47 µF 500 V. Match total capacitance sensibly (the doubler wants about 60 µF effective) |
-| 25-59 | 100-40 µF, 350/300 V can | Low-voltage B+ filter | Discrete 100 µF 450 V + 47 µF 500 V, or a restuffed can. Recap kits exist (see §9) |
-| 25-57 | 100 µF | Chassis (terminal strip K/L) | 100 µF 250 V (blog used 200 V original → 250 V) |
-| 25-16 ×2 | 20 µF | Chassis | 20 µF ≥ 250 V |
+| 25-34 ×2 (**C78, C79**) | **125 µF** | HV doubler. The chart shows about **831 V** across the pair in standby, so each sees about **415–450 V** | **500 V**, 105 °C parts are the comfortable choice; 450 V parts have almost no margin at high line. Keep **R44/R45 100 kΩ 2 W** across them (§3.2). The 2021 blog used a 100 µF 450 V and a 47 µF 500 V |
+| 25-59 (**C77A 40 µF, C77B 100 µF**) | 100-40 µF can, 350/300 V | Low-voltage B+ pi filter (about 250 V) | Discrete 47 µF + 100 µF at ≥ 350 V, or a restuffed can. Recap kits exist (see §9) |
+| 25-57 (**C81**) | 100 µF | Low-voltage half-wave doubler | 100 µF 250 V (blog replaced a 200 V part with a 250 V part) |
+| 25-16 ×2 (**C403, C404**) | 20 µF | Bias filter (−170 V rail, **polarity reversed**) | 20 µF ≥ 250 V; positive lead to ground |
 | 25-135 | 20 µF PC-mount | Carrier generator board | 20 µF 350 V (matches the recap-kit listing) |
 | 25-54 ×4 | 10 µF 15 V | Carrier generator board (small axial) | 10 µF 50 V |
 
@@ -141,7 +168,7 @@ Rankings combine the manual's circuit knowledge, the service bulletins and the f
 | Part | Likelihood | Notes |
 |---|---|---|
 | 0.005 µF 1.4 kV and 1.6 kV discs (21-35 and its 1.4 kV sibling) | High | Line-to-chassis safety caps. The blog replaced Z5U discs at BC/BD/BE with **X1/Y2 safety caps**. Do this regardless of symptoms |
-| 2 µF "resin" (27-34, 5–6 per kit) | Medium | Film/resin; check leakage and ESR |
+| 0.2 µF "resin" (27-34, 5–6 per kit; the price list reads ".2 µfd resin") | Medium | Film/resin; check leakage and ESR |
 | Mica (many) | Low | Check only if a stage is dead |
 | Neutralizing and trimmer caps (31-13 3–12 pF, 2–19 pF carrier null) | Low | Mechanical; clean and re-set |
 
@@ -152,8 +179,9 @@ Rankings combine the manual's circuit knowledge, the service bulletins and the f
 The 2021 blog measured **more than half of the transmitter's roughly 100 resistors more than 10% high**, and it replaced most of them. W7EKB and WA2CKY say the same thing about the SB-301/401 pair: carbon-composition parts drift up, sometimes by hundreds of percent, and Heathkit tolerances are loose.
 
 - **Do not shotgun-replace.** Measure each resistor in critical circuits (bias dividers, plate/screen feeds, ALC, VOX, metering multipliers) and replace the ones out of tolerance.
-- **Critical values to verify in place or lifted:** bias dividers off the −170 V rail; the **6.8 kΩ 1 W driver plate/screen dropper R5** (SB-401-11 item 9); the **150 Ω driver cathode resistor** (SB-401-11); the 4.7 kΩ grid-meter resistor; the 750 Ω plate-meter resistor and 500 kΩ HV multiplier (both set the meter calibration); the **six 10 Ω final-cathode resistors**; the **4 kΩ 7 W wirewound** (the blog replaced a crumbling 7 W part with a 10 W part); and the 2 W carbon-comp parts (the blog found a 110 kΩ 2 W one still good).
-- **R402** was raised from 1/2 W to **1 W** in the SB-401; the same change is recommended for the SB-400's R71 (AF6C).
+- **Critical values to verify in place or lifted:** **R44, R45 and R41 (100 kΩ, 2 W)**, the bleeders in the high- and low-voltage supplies (the blog's "110 kΩ 2 W carbon comp" is almost certainly one of these; 100 kΩ ±10% is fine, but a high-reading bleeder leaves the 125 µF caps charged); **R412 1 kΩ 1 W** (bias filter); bias dividers off the −170 V rail; the **6.8 kΩ 1 W driver plate/screen dropper R5** (SB-401-11 item 9); the **150 Ω driver cathode resistor** (SB-401-11); the 4.7 kΩ grid-meter resistor; the 750 Ω plate-meter resistor and 500 kΩ HV multiplier (both set the meter calibration); the **six 10 Ω final-cathode resistors**; the **4 kΩ 7 W wirewound** (the blog replaced a crumbling 7 W part with a 10 W part); and the 2 W carbon-comp parts (the blog found a 110 kΩ 2 W one still good).
+- **The 680 Ω resistor from terminal strip P lug 3 to the wire joining the V10/V11 lug-3 pins** (installed on manual p. 94) was added in the SB-401 to cut distortion: the 1967 *73* review says it "reduces the already acceptable distortion products figure by 3 to 4 dB." KB2QIU calls it the finals' grid-voltage connection and the review calls it the screen supply; check the pin function on the schematic before you probe it. Replace it if it has drifted.
+- **R402** was raised from 1/2 W to **1 W** in the SB-401; the same change is recommended for the SB-400's R71 (AF6C). It is the one on terminal board #2 in the X-ray view (p. 140), next to R401/R412 on the −170 V supply.
 - Use 500 V carbon film or metal film in the high-voltage areas. Lift one end of replaced parts slightly off the board to ease later service.
 
 ## 3.3 Diodes
@@ -177,7 +205,7 @@ The 2021 blog measured **more than half of the transmitter's roughly 100 resisto
 - **LMO and tuning cap.** Intermittent frequency jumps come from dirty moving contacts in the LMO tuning cap; run the dial end-to-end several times first (W7EKB). Bulletin **SB-401-13** says to clean the **phono connector on the rear of the LMO**.
   - K9STH (via Kembel, p. 124): many tube LMOs develop a **"warble" while tuning**, caused by dried lubricant on the tuning capacitor's pivot points. Cleaning helps, but it usually returns unless the **rotor shaft is bonded to the capacitor frame with a braid** (§4.6).
   - KI4IUA (p. 130): hardened grease can make the stop washers bind so the dial only turns about 2½ of the 5 turns.
-  - **Heathkit-Radios, "sb-401 lmo" (CT7AWB, Apr.–May 2026):** a cheap SB-401 whose LMO gave no output, or a very noisy one when tapped. On the bench, the LMO produced signal everywhere except near the end of its range, where the output dropped to almost nothing. He found a 100 kΩ resistor reading 120 kΩ and replaced it, then re-soldered **the wire from the large variable capacitor to ground**; the LMO then worked. WB9UVJ asked about the output curve and the capacitor plate spacing. Together with K9STH's braid fix, this points to **a poor rotor-to-ground bond and drifted resistors** as the first things to check.
+  - **Heathkit-Radios, "sb-401 lmo" (CT7AWB, Apr.–May 2026):** a cheap SB-401 whose LMO gave no output, or a very noisy one when tapped. On the bench, the LMO produced signal everywhere except near the end of its range, where the output dropped to almost nothing. He found a 100 kΩ resistor reading 120 kΩ and replaced it, then re-soldered **the wire from the large variable capacitor to ground**; the LMO then worked. WB9UVJ asked about the output curve and the capacitor plate spacing. Together with K9STH's braid fix, this points to **a poor rotor-to-ground bond and drifted resistors** as the first things to check. The manual's 6BZ6 LMO schematic (p. 147) has a 330 kΩ grid leak, 47 Ω, 1 kΩ screen resistor and a 10 kΩ bias resistor feeding the shifter diode, but **no 100 kΩ**, so his unit may be a different LMO revision; measure against the schematic of the one in your hands.
 - **Loading cap turns when the plate cap is turned** → SB-401-14.
 - **Dial cord and drive.** The 2021 blog's unit had a missing dial string and a missing load-select string and spring. Replacement cord and the **dial pulley/spring** are the usual lost parts.
 - **Paint flaking, silkscreen, cracked knobs.** Cosmetic; clean silkscreen gently (91% alcohol was used on the blog unit).
@@ -191,7 +219,19 @@ The 2021 blog measured **more than half of the transmitter's roughly 100 resisto
 2. Check the **power-transformer label**: single 120 V (54-143) or dual (54-198). Check the fuse holder and confirm the fuse is **4 A slow-blow at 120 V**.
 3. Inspect for heat damage around the power resistors and the 125 µF caps. Smell the transformer.
 4. Check which tubes are fitted and whether any are the wrong type; verify the LMO label.
-5. **Do the manual's resistance check** with the fuse and tubes out, ohmmeter common to the chassis (manual pp. 88–90; readings are VTVM values, within ±20%, and *VOM readings will differ considerably*). Selected points:
+5. **If the unit is already built, put it back into the manual's "initial test" state first.** The manual's Initial Test (p. 87) was written for a kit that is not finished yet, so its readings only apply if you undo seven things (KB2QIU, Heathkit group, May 2024; the page numbers are where the manual reinstalls each):
+
+   | # | Undo | Redone at |
+   |---|---|---|
+   | 1 | Remove both 6146 finals and pilot lamp TW | p. 88 step 1 (readings are quoted with and without them) |
+   | 2 | Unsolder the large green transformer lead from lug 3, terminal strip J | p. 89 step 2 |
+   | 3 | Remove the crystals | p. 89 step 3 (Y10); p. 96 (accessory pack, Y9/Y11) |
+   | 4 | Remove all tubes | p. 89 step 4, except the 6CL6, which goes in on p. 95 step 3 |
+   | 5 | Remove the fuse | p. 89 step 5 |
+   | 6 | Unsolder the **680 Ω resistor from lug 3, terminal strip P** | p. 94 step 1 (column 2) |
+   | 7 | Unsolder **coil TB lug 2 from feedthrough capacitor Q** | p. 94 (bottom of column 1) |
+
+   Tag every lead you lift, and photograph first. Then **do the manual's resistance check** with the fuse and tubes out, ohmmeter common to the chassis (manual pp. 88–90; readings are VTVM values, within ±20%, and *VOM readings will differ considerably*). Selected points:
 
 | Terminal strip / lug | Expected |
 |---|---|
@@ -219,7 +259,7 @@ The 2021 blog measured **more than half of the transmitter's roughly 100 resisto
 1. **Replace the electrolytics** (§3.1) *before* applying power. Observe the polarity of each can; the negative-bias filters are reversed relative to B+.
 2. Replace the line-bypass discs with X1/Y2 (§3.1). Install the IEC inlet or three-wire cord.
 3. Test the **filter choke**: **120–140 Ω is normal; below 100 Ω means shorted turns** (SB-401-10). If it has failed, the Heath replacement was PN 46-32 (4.5 H at 150 mA) per bulletin SB-401-2D (§5.2). Note the manual's parts list shows 46-43, so confirm the number on your own choke.
-4. Check the **bleeder / equalizing resistors** across the two 125 µF caps and verify they discharge the bank in under a minute. *The OCR of the manual did not give a readable bleeder designator; check the schematic.*
+4. Check the **bleeder / equalizing resistors R44 and R45 (100 kΩ 2 W)** across the two 125 µF caps (and R41 across the low-voltage 40 µF section). With 720–831 V across 200 kΩ, R44/R45 carry only a few milliamps, so the bank drains slowly even when they are good; **discharge manually every time** and verify with a meter.
 5. **First power-up on a variac with a lamp in series** (series bulb limiter) and a 4 A slow-blow in the holder: bring up to 60–70 V, watch for heat, smell and arcing, then to full line. The manual's first power test (p. 90): FUNCTION to STBY, expect **−170 VDC** between pin 5 of V10/V11 and chassis; then METER to HV expects **about 800 V** and PLATE expects 0 mA.
 6. Confirm V7 (OA2) strikes and glows steadily, and the 6.3 V filament string reads right at the tube sockets.
 
@@ -337,7 +377,7 @@ All 20 entries from the Heath-list transcription. Numbers are as printed (the 20
 | SB-401-7 | May 23, 1974 | CW VOX troubleshooting | AC/DC reference voltages at V12/V13 pins; VOX delay drift from D105 leakage or C141 change; mount both parts on the board bottom |
 | SB-401-8 | May 23, 1974 | Alternate tune-up | Presets, 30-second key-down limit, plate current 200–240 mA |
 | SB-401-9 | May 23, 1974 | **Instability checklist** | RFC4/RFC6 not swapped; C26 isolated from shaft; 100 Ω resistor between CM/CN coil lugs; lead dress; replace driver/final tubes and re-neutralize; align into a non-reactive 50 Ω load |
-| SB-401-10 | May 23, 1974 | Hum guide | Filter choke 120–140 Ω normal; check caps C183, C184, C147, C185, C78, C79, C81, C77A/B, C403, C404, C402, C106 as printed (transcription table is ambiguous); retighten grounds; check heater-cathode leakage; **solder the C79 mounting lug to its metal wafer** |
+| SB-401-10 | May 23, 1974 | Hum guide | Filter choke 120–140 Ω normal; check for leakage **C78, C403, C79, C404, C81, C402, C77A, C106, C77B** (the 1998 repost pairs these with the SB-400's C180, C183, C181, C184, C179, C147, C182A, C185, C182B; the 1997 repost scrambled the two columns); retighten grounds; check heater-cathode leakage; **solder the C79 mounting lug to its metal wafer** |
 | SB-401-11 | May 23, 1974 | **Driver stage guide** | **1.5–2.5 V RF at V9 grid** all bands; bias −15 VDC key-up / −0.5 VDC key-down at V9 pin 2; cathode **150 Ω**; check C4 A–D wiring to BS3R/BS4R; check R-4, R-5 (**6.8 kΩ 1 W**), RFC-4, C-8, C-7, C-58 if plate/screen voltage is ≥ 50 V low |
 | SB-401-12 | July 24, 1974 | Resistance at terminal strip AC | Lugs 2 and 4 read 0 Ω once the RL-1 ground wire is added; expected |
 | SB-401-13 | July 24, 1978 | LMO drift | Clean the **phono connector on the LMO rear** |
@@ -355,7 +395,8 @@ Related: **SB-400-1/-2/-3** (driver, hum and CW VOX guides, May 23, 1974) are th
 - **Transceive** needs the receiver's LMO, heterodyne oscillator and BFO signals via the rear RCA jacks (RCVR LMO, HET OSC, RCVR BFO), the speaker, anti-VOX and mute jacks, and the RCVR ANT coax. Set the SB-401 **FREQ CONTROL to LOCKED**; use **UNLOCKED** for split or independent operation. After the SBA-401-1 kit, LOCKED is for use with the receiver independent of band (manual p. 116).
 - **CW offset:** both rigs transmit **1 kHz above** the dial on CW so the receiver beat note is 1 kHz.
 - **Sideband convention:** LSB on 80 and 40 m; USB on 20 m and up.
-- **Interconnect cables:** W7EKB says they should be **RG-62, not RG-58**. The kit lists RG-174 for internal wiring only, so check what your pair carries.
+- **Interconnect cables:** the three signal cables that bring the **VFO (LMO), BFO and heterodyne-oscillator** signals into the transmitter are **RG-62**, cut to **exactly 2 ft** each (W2JDL, *73*, July 1967: "The cable is supplied with the kit"). W7EKB says the same: **RG-62, not RG-58**. If the pair has been recabled, check length and type.
+- **CW with the receiver:** leave the transmitter's **FUNCTION switch in TRCV (transceive) for CW as well as SSB.** Putting it in TRAN for CW gives a constant beat note in the receiver; Heath issued a bulletin and revised the manual for this (W2JDL, 1967).
 
 ## 6.2 Rear panel (AF6C Table 3)
 
@@ -398,11 +439,14 @@ LINEAR RELAY grounds on transmit; ALC INPUT takes ALC voltage from the amplifier
 
 # 10. Sources
 
-- Heath Co., *Assembly and Operation of the Heathkit SSB Transmitter Model SB-401 (Condensed Manual)*, 595-947-10, ©1966. archive.org item `assemblyoperatio00unse_0` (Ron Patterson W6FM collection).
+- Heath Co., *Assembly and Operation of the Heathkit SSB Transmitter Model SB-401*, 595-947-xx, ©1966: owner's 88-page scan (`sb-401.pdf`, not redistributed), and the "Condensed Manual" 595-947-10 on archive.org, item `assemblyoperatio00unse_0` (Ron Patterson W6FM collection).
 - Eckweiler AF6C, "Heathkit of the Month #43: SB-401," w6ze.org (Oct. 2012).
 - Heath mailing list archive (puck.nether.net/pipermail/heath): "Heathkit Service Bulletins — SB-401 (Complete)" (Aug. 1997); "Grid meter reading on SB-102 / Heathkit Service Bulletin Website" (Dec. 2014); "SB-301/SB-401 Functional Repair Guidelines" (Oct. 2010); "SB-401 Info/Experience needed" (Apr. 2008); "SB-401" (Aug. 2010); "SB401 Problem" (Dec. 2001); "Any SB-401 Hints available?" (Jul. 1997).
 - rec.radio.amateur.boatanchors, "Finals going bad in Heathkit SB-401 transmitter?" (Jul. 2011).
 - Heathkit-interests blog, *Heathkit SB-401 Amateur Transmitter* (Feb. 2021).
+- Waters, M. (W2JDL), "The Heathkit SB401 Transmitter," *73 Magazine*, July 1967, pp. 98–100.
+- Heath mailing list, "Heathkit Service Bulletins: SB-401 (Complete 1966-89)" (J. Lutz, June 13, 1998), the post AF6C cites for the bulletins.
+- Heathkit group (groups.io), "SB 401 is here and the..." (May 2024), messages 7183–7186 (W7EKB, WB4GRA, AF6C) and KB2QIU's "undo" list.
 - Kembel, R. W., *Heathkit HW-101 and SB-10x Restoration and Troubleshooting*, rev. Dec. 17, 2021 (LMO notes by K9STH and KI4IUA; filter table).
 - Heathkit-Radios (groups.io), "sb-401 lmo" thread, messages 22979–22994 (CT7AWB, WB9UVJ), Apr.–May 2026.
 - G3OOU, *Heathkit SB Line — Where Next?*, qsl.net/g3oou.
@@ -411,24 +455,24 @@ LINEAR RELAY grounds on transmit; ALC INPUT takes ALC voltage from the amplifier
 
 # 11. What the manual confirmed and what it didn't
 
-**Confirmed against the Heath manual (595-947-10):** tube complement and the LMO tube type; fuse and lamp type; power draw; HV and bias values at first power-up; alignment sequence; final bias at 50 mA; tune-up currents; neutralizing procedure; the 30-second key limit; the discharge procedure; the troubleshooting chart.
+**Confirmed against the Heath manual (595-947-xx):** tube complement and the LMO tube type (LMO schematic p. 147: 6BZ6); fuse and lamp type; power draw; HV and bias values at first power-up; alignment sequence; final bias at 50 mA; tune-up currents; neutralizing procedure; the 30-second key limit; the discharge procedure; the troubleshooting chart.
 
 **Not confirmed, because the scan does not preserve it:**
 
-- The **voltage and resistance chart fold-outs** (pp. 145–146) and the **schematic**. Those are the reference for stage-by-stage bench measurements.
-- **Electrolytic voltage ratings** and **bleeder designators.** Replacement ratings are derived from circuit voltages, not printed values.
+- The **resistance chart** and the full **schematic** have been seen in the owner's scan but not transcribed. Read stage-by-stage bench values from the page; only the headline voltages are tabulated in §2.5.
+- **Electrolytic voltage ratings.** The manual prints none; replacement ratings are derived from the measured circuit voltages.
 - **Text of bulletins** SB-401-15, -16 and the second "-14".
 - Where the bulletin part numbers differ from the manual (46-36 / 46-32 versus the parts list's 46-43), confirm against your own unit.
 
 **Sources not read for Rev. 1:**
 
-- **groups.io Heathkit-Radios** (partly). The group's pages sit behind a bot check, so only two threads supplied by the owner were read. The "sb-401 lmo" thread is used; the other thread was a "first Heathkit" reminiscence with no technical content (one poster, WA4FJC, mentions the SB-401 as his last big kit). The rest of the group's SB-401 history has not been searched.
+- **groups.io** (partly: the Heathkit-Radios "sb-401 lmo" thread and one page of the Heathkit group's "SB 401 is here" thread). The group's pages sit behind a bot check, so only two threads supplied by the owner were read. The "sb-401 lmo" thread is used; the other thread was a "first Heathkit" reminiscence with no technical content (one poster, WA4FJC, mentions the SB-401 as his last big kit). The rest of the group's SB-401 history has not been searched.
 - **antiqueradios.com t=422212** returned HTTP 403 and has not been supplied.
 - **EEVblog:** search found no SB-401 thread, and nothing relevant has been added.
 
 **Source conflicts found in Rev. 1.1:**
 
-- **LMO part number** (110-32 vs 110-40) and the SB-301's 110-40 tube type disagree between Kembel's table, the Heath manual, AF6C and the SB-301 plan (§2.2). The SB-401's own manual says **6BZ6**, which agrees with AF6C. Treat the LMO label as the authority.
+- **LMO part number** (110-32 vs 100-40/110-40) and the SB-301's 110-40 tube type disagree between Kembel's table, the Heath manual, AF6C and the SB-301 plan (§2.2). The SB-401's own manual lists **100-40** and shows a **6BZ6**, which agrees with AF6C and the bulletin. Treat the LMO label as the authority.
 - Kembel's HW-101/SB-10x guide is for different rigs; its procedures are adapted here only where the circuit is shared (LMO, crystal filter, bandpass coupler, SB-line practice).
 
 **Corrections to earlier assumptions:** *None yet.* Rev. 2 should list them, as the SB-301 plan did.
