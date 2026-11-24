@@ -491,7 +491,7 @@ Before and after each fix, record the BAND, GRID, PLATE and REL PWR readings, th
 
 # 7. Operation notes
 
-## 6.1 With the SB-301 or SB-303
+## 7.1 With the SB-301 or SB-303
 
 - **Transceive** needs the receiver's LMO, heterodyne oscillator and BFO signals via the rear RCA jacks (RCVR LMO, HET OSC, RCVR BFO), the speaker, anti-VOX and mute jacks, and the RCVR ANT coax. Set the SB-401 **FREQ CONTROL to LOCKED**; use **UNLOCKED** for split or independent operation. After the SBA-401-1 kit, LOCKED is for use with the receiver independent of band (manual p. 116).
 - **CW offset:** both rigs transmit **1 kHz above** the dial on CW so the receiver beat note is 1 kHz.
@@ -499,11 +499,11 @@ Before and after each fix, record the BAND, GRID, PLATE and REL PWR readings, th
 - **Interconnect cables:** the three signal cables that bring the **VFO (LMO), BFO and heterodyne-oscillator** signals into the transmitter are **RG-62**, cut to **exactly 2 ft** each (W2JDL, *73*, July 1967: "The cable is supplied with the kit"). W7EKB says the same: **RG-62, not RG-58**. If the pair has been recabled, check length and type.
 - **CW with the receiver:** leave the transmitter's **FUNCTION switch in TRCV (transceive) for CW as well as SSB.** Putting it in TRAN for CW gives a constant beat note in the receiver; Heath issued a bulletin and revised the manual for this (W2JDL, 1967).
 
-## 6.2 Rear panel (AF6C Table 3)
+## 7.2 Rear panel (AF6C Table 3)
 
 PATCH (RCA, 600 Ω), KEY (¼ in.), AC INPUT (2-pin), accessory socket (9-pin: pins 8/9 supply the external antenna relay at line voltage), RCVR AUDIO, SPKR, RCVR LMO, ANTI-VOX, HET OSC, RCVR BFO, RCVR MUTE, LINEAR RELAY, ALC INPUT, SO-239 ANTENNA, RCVR ANT.
 
-## 6.3 Using an external amplifier
+## 7.3 Using an external amplifier
 
 LINEAR RELAY grounds on transmit; ALC INPUT takes ALC voltage from the amplifier. The ALC meter should peak at or below midscale on SSB.
 
