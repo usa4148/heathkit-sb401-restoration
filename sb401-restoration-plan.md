@@ -1,6 +1,6 @@
 ---
 title: "Heathkit SB-401 Transmitter — Restoration Plan"
-subtitle: "Rev. 1.3 — built from the Heath manual (595-947-10), service bulletins and field sources"
+subtitle: "Rev. 1.4 — built from the Heath manual (595-947-10), service bulletins and field sources"
 date: "November 2026"
 geometry: margin=0.9in
 fontsize: 10pt
@@ -38,8 +38,8 @@ toc: true
 | *Finals going bad in Heathkit SB-401 transmitter?* (Jul. 2011) | rec.radio.amateur.boatanchors (Google Groups) | 80 m neutralization and tune-up field thread. |
 | G3OOU, *Heathkit SB Line — Where Next?* | qsl.net/g3oou | General SB-line ageing notes; 6146 and carbon-comp comments. |
 | Kembel, *Heathkit HW-101 and SB-10x Restoration and Troubleshooting* (rev. Dec. 17, 2021, 190 pp.) | PDF supplied by owner | Not SB-401-specific, but it carries the **LMO part-number table**, **K9STH's tube-LMO repair** and KI4IUA's stuck-LMO repair, the Heath **filter table** (404-283 is the SB-401's SSB filter), and general SB-line servicing practice (p. 116–132, 101–105). |
-| **Heathkit-Radios** (groups.io), "sb-401 lmo," Apr. 29 – May 2, 2026 (messages 22979–22994) | Pasted by owner | One SB-401 LMO fault and its fix (§3.5, §5.1). *The rest of the group was not searched (§11).* |
-| EEVblog forum, antiqueradios.com thread t=422212 | eevblog.com, antiqueradios.com | *Not retrieved for this revision (§11).* |
+| **Heathkit-Radios** (groups.io), "sb-401 lmo," Apr. 29 – May 2, 2026 (messages 22979–22994) | Pasted by owner | One SB-401 LMO fault and its fix (§3.5, §5.1). *The rest of the group was not searched (§12).* |
+| EEVblog forum, antiqueradios.com thread t=422212 | eevblog.com, antiqueradios.com | *Not retrieved for this revision (§12).* |
 
 **Manual page references use the manual's printed page numbers.** The owner's scan is image-only, so figures and chart values in this revision were read by eye from the page images (the archive.org copy has an OCR text layer only, and the charts and schematic do not survive in it). Values read from the voltage chart are marked as such and should be confirmed on the page before you condemn a part.
 
@@ -161,7 +161,7 @@ Rankings combine the manual's circuit knowledge, the service bulletins and the f
 | Ref (part no.) | Value | Where | Replace with |
 |---|---|---|---|
 | 25-34 ×2 (**C78, C79**) | **125 µF** | HV doubler. The chart shows about **831 V** across the pair in standby, so each sees about **415–450 V** | **500 V**, 105 °C parts are the comfortable choice; 450 V parts have almost no margin at high line. Keep **R44/R45 100 kΩ 2 W** across them (§3.2). The 2021 blog used a 100 µF 450 V and a 47 µF 500 V |
-| 25-59 (**C77A 40 µF, C77B 100 µF**) | 100-40 µF can, 350/300 V | Low-voltage B+ pi filter (about 250 V) | Discrete 47 µF + 100 µF at ≥ 350 V, or a restuffed can. Recap kits exist (see §9) |
+| 25-59 (**C77A 40 µF, C77B 100 µF**) | 100-40 µF can, 350/300 V | Low-voltage B+ pi filter (about 250 V) | Discrete 47 µF + 100 µF at ≥ 350 V, or a restuffed can. Recap kits exist (see §10) |
 | 25-57 (**C81**) | 100 µF | Low-voltage half-wave doubler | 100 µF 250 V (blog replaced a 200 V part with a 250 V part) |
 | 25-16 ×2 (**C403, C404**) | 20 µF | Bias filter (−170 V rail, **polarity reversed**) | 20 µF ≥ 250 V; positive lead to ground |
 | 25-135 | 20 µF PC-mount | Carrier generator board | 20 µF 350 V (matches the recap-kit listing) |
@@ -340,6 +340,7 @@ All mods are optional and reversible, and the stock circuit comes first.
 
 | Symptom | Likely causes |
 |---|---|
+| **No output in TUNE or any mode** | See **chapter 6** for a stage-by-stage ladder |
 | Filaments do not light | Green transformer lead not connected to J lug 3; open filament string; fuse missing or blown; pinched wires under shields |
 | No DC at HET OSC test socket (crystal-kit units) | V8 voltages and wiring; band switch; crystals in wrong sockets; ground at crystal sockets; V7 (OA2) bad; function switch |
 | No final plate current | V10/V11 voltages and wiring; cathode metering circuit; meter; BIAS ADJUST control |
@@ -392,7 +393,103 @@ All 20 entries from the Heath-list transcription. Numbers are as printed (the 20
 
 Related: **SB-400-1/-2/-3** (driver, hum and CW VOX guides, May 23, 1974) are the SB-400 versions of SB-401-11, -10 and -7. The full set is at nostalgickitscentral.com; the Heath-list repost links `nostalgickitscentral.com/heath/Service_Bulletins/sb-sb401.pdf`.
 
-# 6. Operation notes
+# 6. No output in TUNE mode
+
+The commonest "dead transmitter" complaint. In TUNE the transmitter keys itself on the **3395.4 kHz CW crystal (Y10)**: the relay amplifier V12B has its cathode grounded directly by the MODE switch, so **no key or PTT is needed** (AF6C). The audio, VOX-from-voice and balanced-modulator stages are therefore not suspects. Everything from the carrier crystal to the antenna jack is.
+
+*The MODE switch is marked TUNE on some units and AM on others; the schematic shows LSB, USB, CW and TUNE, and the manual's troubleshooting chart says "CW or TUNE." Use whichever position your panel has, and CW with the key down behaves the same way for this diagnosis.*
+
+## 6.1 Before you start
+
+- **Dummy load, not a lamp.** Connect a 50 Ω non-reactive load to ANTENNA. Never key into an open connector.
+- **Key-down limit: 30 seconds** (manual p. 95, SB-401-8). Take readings in short bursts.
+- **HV is live** when you probe. Use one hand, an insulated probe and the RF probe on the VTVM; never reach into the final compartment while powered.
+- Set: FUNCTION TRCV (or TRAN with a non-Heath receiver), MODE TUNE or CW, LEVEL clockwise (about 0.5 mA grid at the end), DRIVER at the first mark from CCW, FINAL LOAD at the 50 Ω mark, LMO at 0.
+- Use the **METER switch** as your first instrument: GRID, PLATE and REL PWR together tell you which half of the transmitter is dead (§6.2).
+
+## 6.2 Read the meters first
+
+| GRID | PLATE (keyed) | REL PWR | Most likely area |
+|---|---|---|---|
+| 0 | idle only (about 50 mA, set by BIAS ADJUST) | 0 | **No drive to the finals**: relay, carrier, mixers, heterodyne, driver (§6.3 stages 1–5) |
+| 0 | 0 | 0 | **Finals cut off**: no screen voltage, bias too negative, bad 6146s, open cathode circuit (stage 6), or the relay never closed |
+| normal (0.2–0.5 mA) | rises to about 200–240 mA | 0 | The meter circuit, or the output network after the finals (stage 7) |
+| normal | very high or unstable | 0 or erratic | **Instability** (SB-401-9): neutralization, lead dress, loose shields, grounds; shut it down |
+| any | full scale with no signal | n/a | Bias fault: bias supply, BIAS ADJUST, cathode metering (manual troubleshooting chart) |
+
+## 6.3 Stage-by-stage ladder
+
+Work in this order. Each row gives the check and what it should read. Reference values come from the manual's alignment (pp. 90–96), the voltage chart (p. 145, STBY) and bulletin SB-401-6 (80 m, 260 mA, about 125 W).
+
+**Stage 1: does it go to transmit?**
+
+| Check | Expect | If not |
+|---|---|---|
+| Both relays click (RL1 in the chassis, RL2 the antenna relay); tubes lit | RL1 pulls in on TUNE (or on key) | **V12 (6D10) and V13 (6J11)** weak; **D105 open**; B+ missing; ANTI-VOX turned up too far; **RL1 contacts dirty**; function-switch wiring; low line voltage; phone-patch jack shorted to the transformer case |
+| FUNCTION switch | TRCV or TRAN | Wrong position, or dirty wafer |
+
+**Stage 2: carrier generator** (RF probe on pin E of the carrier board)
+
+| Check | Expect | If not |
+|---|---|---|
+| Carrier at pin E | about **1–1.5 V** (peak the balanced-modulator slug; manual p. 90) | **Y10 (404-215, 3395.4 kHz)** not seated or dead; **V2 (6AV11)** weak (common); MODE switch wiring or shorted coax to it; V3 (6AU6) not keyed on, or its cutoff bias not removed by RL1 |
+
+**Stage 3: heterodyne and LMO chain**
+
+| Check | Expect | If not |
+|---|---|---|
+| **Heterodyne source** | Either the receiver's het-osc cable is connected and **FREQ CONTROL is LOCKED**, or the **SBA-401-1 crystal pack** is installed | **The SB-401 ships with only the CW crystal.** Without the receiver or the crystal pack there is no heterodyne signal and **no output on any band.** Very common on secondhand units, and the cause of many "dead SB-401" posts |
+| DC at the HET OSC test socket (crystal-kit units only) | present | V8 (6AW8), the band-switch wiring, crystals in the wrong sockets, **V7 (OA2)** not striking, ground at the crystal sockets |
+| LMO output | stable signal near 5.0–5.5 MHz | See §3.5 and §4.6: B+, filament and bias leads, rear phono connector (SB-401-13), rotor ground bond, drifted resistors |
+| V4 and V5 (6EW6) | plates about **230–253 V** (chart, STBY) | Dead or weak tubes; **bandpass coupler** (52-65) or the **21 MHz trap** disturbed; **pin 2 foil of V5** shorted to ground |
+
+**Stage 4: driver (V9, 6CL6)**
+
+| Check | Expect | If not |
+|---|---|---|
+| RF at V9 pin 2 | about **1.5 V or more** (1.5–2.5 V on all bands, per SB-401-11) | Mixer chain (stage 3); a misadjusted **8.6 MHz trap (C303)**, which hits 7 and 14 MHz; band switch or driver-coil wiring; interchanged **C4 A–D** sections |
+| Blocking bias at pin 2 | about **−15 V key-up**, about **−0.5 V key-down** | **RL1** not removing bias; relay contacts; wiring |
+| Plate and screen | within about 50 V of the chart (plate region about 214–256 V) | **R5 (6.8 kΩ, 1 W)**, **RFC4** (open), C-8, C-7, C-58, or a weak 6CL6 |
+| Output at V9 plate (pin 6) | about **36 V RF** on 80 m (SB-401-6) | Re-peak the driver plate and grid coils; dirty band switch; shield contact |
+| **RF at the wire between V10 and V11 pin 5** | **35 V or higher**, band-dependent | The same stage 3–4 causes; **RFC5/RFC6** open or swapped |
+
+**Stage 5: neutralization and instability** (only if the stage above is fine)
+
+A transmitter that oscillates or can't be neutralized often reads as "no output." Check the neutralizing capacitor, RFC4/RFC6 not swapped, **C26** isolated from its shaft, lead dress at V5/V8/V9/V10/V11, tube shields and shield grounds (SB-401-9).
+
+**Stage 6: the finals (V10, V11)**
+
+| Check | Expect | If not |
+|---|---|---|
+| Finals' idle current (**V9 out**, METER PLATE, keyed) | **50 mA** with BIAS ADJUST (manual p. 94) | No current: dead 6146s, **−50 V** bias missing, BIAS ADJUST wiring, cathode metering. Too much: bias supply fault |
+| Grid bias | about **−181 V** at the pins in STBY (chart), about −50 V when keyed | Bias supply (D2, C403/C404, R412), RL1 not releasing the cutoff bias |
+| **Screen voltage** | absent in STBY, **present when keyed** (RL1 applies it) | RL1 contacts; the **680 Ω resistor** from terminal strip P lug 3 to the V10/V11 lug-3 wire (open or drifted); screen wiring |
+| HV on the plates | about **800 V** on the HV meter position | Rectifiers D5–D8, **C78/C79**, **R44/R45**, **R17 open**, **feedthrough C67 not connected to RFC9 lug 2** |
+| Tubes themselves | clean, no gas | Swap in a known-good matched pair; a gassy pair also holds RL-2 closed (SB-401-2) |
+
+**Stage 7: output network and metering**
+
+| Check | Expect | If not |
+|---|---|---|
+| RF probe in the ANTENNA connector (manual p. 94) | peaks with DRIVER and FINAL | Loading circuit, band-switch wafers, **tank coil**, the 100/200 pF fixed loading caps on 40/80 m |
+| Antenna relay **RL2** | transfers to the ANTENNA jack | Dirty contacts, relay coil, the wire from RL2 to the antenna connector |
+| REL PWR meter | tracks the probe reading | **D9**, **R34 10 kΩ**, **R35 1 kΩ**, **R36 600 Ω**, **C80**: a dead meter circuit looks like "no output" |
+
+## 6.4 Most likely causes, in order
+
+1. **No heterodyne source** (receiver not connected and no SBA-401-1 crystals).
+2. **A dead or weak tube** among V2, V9, V12, V10/V11.
+3. **Dirty relay or band-switch contacts**, and the RL1 pin 7 and RL2 circuits.
+4. **LMO** not oscillating (leads, phono connector, ground bond).
+5. **Drifted resistors** in the driver plate and screen supply (R5, the 680 Ω finals resistor) or the bias dividers.
+6. **Loose chassis hardware and shield grounds**.
+7. **Instability** from missing shields or incorrect neutralization.
+
+## 6.5 What to write down
+
+Before and after each fix, record the BAND, GRID, PLATE and REL PWR readings, the VTVM readings at pin E, V9 pin 2 and V10/V11 pin 5, and which tubes you swapped. They make the next fault faster, and they are what a forum helper will ask for.
+
+# 7. Operation notes
 
 ## 6.1 With the SB-301 or SB-303
 
@@ -410,7 +507,7 @@ PATCH (RCA, 600 Ω), KEY (¼ in.), AC INPUT (2-pin), accessory socket (9-pin: pi
 
 LINEAR RELAY grounds on transmit; ALC INPUT takes ALC voltage from the amplifier. The ALC meter should peak at or below midscale on SSB.
 
-# 7. Tips and tricks
+# 8. Tips and tricks
 
 - Start with **grounds and electrolytics**, not a shotgun resistor swap.
 - **Lift one end of replaced resistors** so the next person can measure them in circuit.
@@ -419,9 +516,9 @@ LINEAR RELAY grounds on transmit; ALC INPUT takes ALC voltage from the amplifier
 - Take **grid current as a drive indicator, not a goal**: the K3WQ thread concluded little or no grid current on 80 m is not itself a fault with 6146s, even though the manual's wording suggests otherwise.
 - **Dummy load, not a light bulb.**
 - If the 80 m dip and the power maximum do not coincide, suspect **neutralization** first, then the **fixed loading capacitors** (the 100/200 pF caps added on 40/80 m) and the band-switch contact; see the 2011 boatanchors thread.
-- A **recap kit** (§9) saves hunting for the carrier-generator board electrolytics.
+- A **recap kit** (§10) saves hunting for the carrier-generator board electrolytics.
 
-# 8. Maintenance schedule
+# 9. Maintenance schedule
 
 | Interval | Task |
 |---|---|
@@ -431,7 +528,7 @@ LINEAR RELAY grounds on transmit; ALC INPUT takes ALC voltage from the amplifier
 | As needed | Replace the 6146s if relay hang-up, low output or neutralization trouble appears |
 | After a recap, every 5–10 years (suggested) | Check electrolytic leakage/ESR; the 125 µF caps are the first to go |
 
-# 9. Parts sources
+# 10. Parts sources
 
 - **Hayseed Hamfest** (Tom N0JMY, hayseedhamfest.com): replacement electrolytics and recap kits for the SB-301 and SB-401 (Heath-list threads, 2008 and 2010). In 2008 he was adding the SB-401 to the line and listing five electrolytics (the carrier-generator board's small ones, a PC-mount 20 µF, and the two 125 µF cans). Confirm what the current kit contains.
 - **Nichicon, Panasonic and similar 105 °C electrolytics** at Mouser/Digi-Key (the 2021 blog's choices).
@@ -441,7 +538,7 @@ LINEAR RELAY grounds on transmit; ALC INPUT takes ALC voltage from the amplifier
 - **Original service bulletins:** nostalgickitscentral.com.
 - **P.E.C. network (84-22):** no longer available per the 2021 blog; test it carefully and keep it if it measures right.
 
-# 10. Sources
+# 11. Sources
 
 - Heath Co., *Assembly and Operation of the Heathkit SSB Transmitter Model SB-401*, 595-947-xx, ©1966: owner's 88-page scan (`sb-401.pdf`, not redistributed), and the "Condensed Manual" 595-947-10 on archive.org, item `assemblyoperatio00unse_0` (Ron Patterson W6FM collection).
 - Eckweiler AF6C, "Heathkit of the Month #43: SB-401," w6ze.org (Oct. 2012).
@@ -455,9 +552,9 @@ LINEAR RELAY grounds on transmit; ALC INPUT takes ALC voltage from the amplifier
 - Heathkit-Radios (groups.io), "sb-401 lmo" thread, messages 22979–22994 (CT7AWB, WB9UVJ), Apr.–May 2026.
 - G3OOU, *Heathkit SB Line — Where Next?*, qsl.net/g3oou.
 - RigPix, SB-401 entry (dates, final tubes).
-- *Heathkit-Radios* (groups.io) — see §11.
+- *Heathkit-Radios* (groups.io) — see §12.
 
-# 11. What the manual confirmed and what it didn't
+# 12. What the manual confirmed and what it didn't
 
 **Confirmed against the Heath manual (595-947-xx):** tube complement and the LMO tube type (LMO schematic p. 147: 6BZ6); fuse and lamp type; power draw; HV and bias values at first power-up; alignment sequence; final bias at 50 mA; tune-up currents; neutralizing procedure; the 30-second key limit; the discharge procedure; the troubleshooting chart.
 
