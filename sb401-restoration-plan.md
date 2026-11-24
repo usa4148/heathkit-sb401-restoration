@@ -1,6 +1,6 @@
 ---
 title: "Heathkit SB-401 Transmitter — Restoration Plan"
-subtitle: "Rev. 1 — built from the Heath manual (595-947-10), service bulletins and field sources"
+subtitle: "Rev. 1.1 — built from the Heath manual (595-947-10), service bulletins and field sources"
 date: "November 2026"
 geometry: margin=0.9in
 fontsize: 10pt
@@ -31,7 +31,8 @@ toc: true
 | *SB-401 Info/Experience needed* (Apr. 2008, N0JMY) | puck.nether.net/pipermail/heath | Which electrolytics a recap kit covers. |
 | *Finals going bad in Heathkit SB-401 transmitter?* (Jul. 2011) | rec.radio.amateur.boatanchors (Google Groups) | 80 m neutralization and tune-up field thread. |
 | G3OOU, *Heathkit SB Line — Where Next?* | qsl.net/g3oou | General SB-line ageing notes; 6146 and carbon-comp comments. |
-| **Heathkit-Radios** (groups.io) | groups.io/g/Heathkit-Radios | Heath field experience. *Not fetched for this revision (§11).* |
+| Kembel, *Heathkit HW-101 and SB-10x Restoration and Troubleshooting* (rev. Dec. 17, 2021, 190 pp.) | PDF supplied by owner | Not SB-401-specific, but it carries the **LMO part-number table**, **K9STH's tube-LMO repair** and KI4IUA's stuck-LMO repair, the Heath **filter table** (404-283 is the SB-401's SSB filter), and general SB-line servicing practice (p. 116–132, 101–105). |
+| **Heathkit-Radios** (groups.io), "sb-401 lmo," Apr. 29 – May 2, 2026 (messages 22979–22994) | Pasted by owner | One SB-401 LMO fault and its fix (§3.5, §5.1). *The rest of the group was not searched (§11).* |
 | EEVblog forum, antiqueradios.com thread t=422212 | eevblog.com, antiqueradios.com | *Not retrieved for this revision (§11).* |
 
 **Manual page references use the manual's printed page numbers.** The archive.org scan is an OCR text layer; the voltage and resistance chart fold-outs (manual pp. 145–146) and the schematic do not survive as readable text. Where this plan needs those, it says so.
@@ -84,13 +85,23 @@ Production and price: first shipments Sept. 1966; kit price **$285** (Radio Elec
 | V12 | 6D10 (triple triode) | VOX amp, relay amp, sidetone amp | Hard to test; VOX and relay faults |
 | V13 | 6J11 (dual pentode) | Anti-VOX amp and sidetone oscillator | Hum, VOX weirdness |
 
-*LMO tube note:* the manual's tube list (p. 123) and AF6C both give **6BZ6** for the LMO in the SB-401 (the SB-400's LMO 110-13 used a 6AU6). The SB-301 plan found that its LMO used a **6CB6** per the manual, not the 6BZ6 the AF6C article implied. **Open the LMO's label before buying a tube.** Fit the type the LMO is marked for, and ideally the same brand, because the LMO is calibrated with its tube.
+*LMO tube note:* the manual's tube list (p. 123) and AF6C both give **6BZ6** for the LMO in the SB-401 (the SB-400's LMO 110-13 used a 6AU6). The SB-301 plan found that its LMO used a **6CB6** per the manual, not the 6BZ6 the AF6C article implied. **Sources disagree on the LMO part number too:**
+
+| Source | SB-401 LMO |
+|---|---|
+| Heath manual 595-947-10 (parts list, pack #4) | **110-40**, V6 = 6BZ6 |
+| AF6C | 110-13 (SB-400); 110-32, then **110-40 from 1968**; both SB-401 versions 6BZ6 |
+| Bulletin SB-401-1D | 110-32 is no longer available; use **100-40-LMO** |
+| Kembel, Table 12 (p. 116) | SB-401 **110-32**, 6BZ6 (his table also lists the SB-101's 110-40 as 6CB6 and the SB-301's 110-40 as 6BZ6) |
+
+Kembel's text distinguishes the two by construction: **110-32 has a large, thick gear on the tuning-capacitor shaft; 110-40 has a small, thin one** (p. 125). That matters for the grounding-braid repair in §4.6. **Open the LMO and read its label and look at the gear before buying a tube or a braid kit.** Fit the tube type the LMO is marked for, and ideally the same brand, because the LMO is calibrated with its tube.
 
 *Typo check:* AF6C's prose calls V1 a "6EA6" in one place; his own table and the manual say **6EA8**.
 
 ## 2.3 How it works (AF6C; manual circuit sections)
 
 - **Signal path (SSB):** mic → V1A preamp → V1B cathode follower → four-diode balanced modulator (carrier from V2) → V3 isolation amp (ALC acts here) → 3395 kHz crystal filter (404-283) → V4 mixes with the 5.0–5.5 MHz LMO (V6) → 8.395–8.895 MHz bandpass coupler → V5 mixes with the crystal heterodyne oscillator (V8) → band-switched driver V9 → 6146 pair → pi network.
+- **Crystal filter:** Heath **404-283** (smaller case; replaced the SB-400's 404-200). Kembel's table gives 2.1 kHz at −6 dB and 5 kHz at −60 dB, shared with the SB-301, SB-310 and SB-101 (p. 101). A secondhand 404-283 with a 30 dB passband dip had a broken PCB track inside (p. 105), so a filter that is dull or lossy is repairable.
 - **Carrier frequencies:** LSB 3393.6 kHz, USB 3396.4 kHz, CW **3395.4 kHz** (CW transmits 1 kHz above the dial frequency so the receiver beat note is 1 kHz). The USB and LSB crystals and the eight heterodyne crystals come from the receiver in transceive, or from the optional **SBA-401-1 crystal pack**. Only the CW crystal (Y10) ships with the kit.
 - **Heterodyne crystals (SBA-401-1):** Y1 38,395.0 · Y2 37,895.0 · Y3 37,395.0 · Y4 36,895.0 · Y5 29,895.0 · Y6 22,895.0 · Y7 15,895.0 · Y8 12,395.0 kHz; Y9 3396.4 USB; Y11 3393.6 LSB.
 - **Final:** two 6146s in parallel, class AB1. **Idle plate current about 50 mA total** (the manual's BIAS ADJUST step; ~25 mA each) at a bias of about **−50 V**. Standby cuts the tubes off by removing **screen voltage** (the grids sit at −170 V DC in STBY, manual p. 90).
@@ -164,6 +175,9 @@ The 2021 blog measured **more than half of the transmitter's roughly 100 resisto
 - **Chassis grounds.** K9STH: loosen and retighten *every* machine screw and nut that passes through the chassis; he credits this with fixing about 90% of intermittent faults. Heath says the same (manual p. 117: retighten all hardware; 90% of returned kits had bad connections).
 - **Switch and relay contacts.** Band, mode, function and meter switches plus RL1/RL2: clean with DeOxit-type cleaner. Do not over-lubricate.
 - **LMO and tuning cap.** Intermittent frequency jumps come from dirty moving contacts in the LMO tuning cap; run the dial end-to-end several times first (W7EKB). Bulletin **SB-401-13** says to clean the **phono connector on the rear of the LMO**.
+  - K9STH (via Kembel, p. 124): many tube LMOs develop a **"warble" while tuning**, caused by dried lubricant on the tuning capacitor's pivot points. Cleaning helps, but it usually returns unless the **rotor shaft is bonded to the capacitor frame with a braid** (§4.6).
+  - KI4IUA (p. 130): hardened grease can make the stop washers bind so the dial only turns about 2½ of the 5 turns.
+  - **Heathkit-Radios, "sb-401 lmo" (CT7AWB, Apr.–May 2026):** a cheap SB-401 whose LMO gave no output, or a very noisy one when tapped. On the bench, the LMO produced signal everywhere except near the end of its range, where the output dropped to almost nothing. He found a 100 kΩ resistor reading 120 kΩ and replaced it, then re-soldered **the wire from the large variable capacitor to ground**; the LMO then worked. WB9UVJ asked about the output curve and the capacitor plate spacing. Together with K9STH's braid fix, this points to **a poor rotor-to-ground bond and drifted resistors** as the first things to check.
 - **Loading cap turns when the plate cap is turned** → SB-401-14.
 - **Dial cord and drive.** The 2021 blog's unit had a missing dial string and a missing load-select string and spring. Replacement cord and the **dial pulley/spring** are the usual lost parts.
 - **Paint flaking, silkscreen, cracked knobs.** Cosmetic; clean silkscreen gently (91% alcohol was used on the blog unit).
@@ -198,6 +212,7 @@ The 2021 blog measured **more than half of the transmitter's roughly 100 resisto
 - DeOxit the band switch (five decks), mode and function switches and all tube sockets; reflow any suspect solder joint.
 - Clean the tuning-capacitor wipers, **lightly** lubricate shaft bushings with thin machine oil (WA2CKY), and leave the LMO closed unless it has a problem (K9STH's LMO notes on the Heath list are the reference).
 - Clean the dial glass, check the pilot-lamp sockets, and replace #47 lamps.
+- *SB-10x advice from Kembel (p. 22) that applies here:* clean each tube socket pin with a dental brush and DeOxit; a loose tube can be tightened by inserting a fine needle between the phenolic and the contact; **clean the contact between each mixer and driver tube shield and its socket tab, and the driver shield clips under the chassis** (missing or poorly grounded shields are "almost guaranteed" to cause transmit instability, consistent with SB-401-9); clean relay contacts with an index card moistened with contact cleaner drawn between the contacts, holding the actuator in to reach the normally-open ones.
 
 ## 4.3 Phase 2: Power supply first
 
@@ -223,6 +238,10 @@ Measure in place, then lift one end of any value that reads high. Work from the 
 - Tube: use the type marked on the LMO label (see §2.2). The LMO is calibrated with its supplied tube; expect a small calibration shift when it is replaced.
 - Check the **phono connector on the LMO** (SB-401-13) and the LMO MODE / FREQ CONTROL switch path.
 - Check dial cord, springs and the zero-set pulley before the dial calibration (manual pp. 96–97).
+- **Bench-test the LMO before anything else.** A tube LMO has three leads: **B+, filament and bias** (the bias lead goes to a 33 kΩ resistor), plus the RCA output. Power it from a bench supply and listen to it on a receiver near 5.25 MHz with the BFO on, or scope or count the output. Tap it. Rock-steady output is the goal; a warble, dropouts when tapped, or output that collapses near one end of the range all point to the capacitor ground bond, its lubricant, or drifted resistors (§3.5).
+- **Removing the LMO without pulling the front panel** (Kembel, p. 122): unplug the line cord; turn the dial fully counterclockwise to the stop; remove the knob; loosen the shaft bushing nut and pull the shaft forward off the circular dial's metal ring; loosen the dial setscrew and ease the dial forward off the spiral follower; free the follower from the pointer; unsolder the three leads (note which goes where) and unplug the RCA output; remove the four chassis nuts (two are under cable bundles; a ¼ in. socket reaches them); lift off the slide-rule/pilot-light assembly. Refit in reverse, then **redo the dial calibration** (manual pp. 96–97, plus Kembel).
+- **Cleaning and the grounding braid** (K9STH, Kembel pp. 124–126): remove the side panel on the **tube side** (10 hex-head ¼ in. sheet-metal screws; the bottom two hold the mounting lugs; two or three carry red lacquer seals from the factory warranty). Do not disturb the small variable capacitor inside. Remove dried lubricant from the main capacitor's pivots (WD-40 and a toothbrush); free the shaft stops so it turns the full five-plus turns; re-lubricate the pivots. Then bond the rotor shaft to the frame: take out the gear setscrew that is exposed with the capacitor about half open, fit a short 8-32 stud, and solder about 2 in. of braid (RG-58 braid works) from the stud to the capacitor frame. **On the 110-32 (large gear)** the stud must be a headless 8-32 rod about ½ in. long so it clears the worm gear; **on the 110-40 (small gear)** a ½ in. 8-32 screw clears, and you tin the head. Turn the shaft through all five turns and confirm the braid touches nothing.
+- **Stuck stop washers** (KI4IUA, pp. 130–131): clean the washers and re-grease (he used white lithium grease). Reassemble with the collar lightly tight, watch a frequency counter on the LMO output, and set the counterclockwise stop near **5.5 MHz** and the clockwise stop near **5.0 MHz** (within about 10 kHz), then tighten.
 
 ## 4.7 Phase 6: First transmit and alignment (manual pp. 90–97)
 
@@ -295,6 +314,10 @@ All mods are optional and reversible, and the stock circuit comes first.
 | Relay stays energized after unkeying | Gassy 6146s; fix = ground relay pin 7 (SB-401-2); replace tubes |
 | VOX delay drifts | Leakage in D105 or change in C141 (SB-401-7) |
 | LMO drift / intermittent shift | Dirty phono connector at LMO (SB-401-13); LMO cap contacts; V7 |
+| LMO no output, noisy when tapped, or output collapses near one end | Rotor-to-frame ground bond; dried capacitor pivot lubricant; drifted LMO resistors (a 100 kΩ read 120 kΩ in the 2026 groups.io case); the three LMO leads. §3.5, §4.6 |
+| "Warble" while tuning | Dried LMO pivot lubricant; add the grounding braid (K9STH) |
+| Dial turns only part of five turns | Stuck stop washers (KI4IUA) |
+| Drive uneven from one end of a 500 kHz segment to the other | Bandpass coupler (52-65, 8.395–8.895 MHz). The manual calls it factory-tuned; Kembel (p. 40) measures the equivalent filter on SB-10x rigs by peaking DRIVER at 50 kHz steps with the 6146 screens removed, and notes sweep alignment is possible. Adapt with care |
 
 ## 5.2 Service bulletin index
 
@@ -380,6 +403,8 @@ LINEAR RELAY grounds on transmit; ALC INPUT takes ALC voltage from the amplifier
 - Heath mailing list archive (puck.nether.net/pipermail/heath): "Heathkit Service Bulletins — SB-401 (Complete)" (Aug. 1997); "Grid meter reading on SB-102 / Heathkit Service Bulletin Website" (Dec. 2014); "SB-301/SB-401 Functional Repair Guidelines" (Oct. 2010); "SB-401 Info/Experience needed" (Apr. 2008); "SB-401" (Aug. 2010); "SB401 Problem" (Dec. 2001); "Any SB-401 Hints available?" (Jul. 1997).
 - rec.radio.amateur.boatanchors, "Finals going bad in Heathkit SB-401 transmitter?" (Jul. 2011).
 - Heathkit-interests blog, *Heathkit SB-401 Amateur Transmitter* (Feb. 2021).
+- Kembel, R. W., *Heathkit HW-101 and SB-10x Restoration and Troubleshooting*, rev. Dec. 17, 2021 (LMO notes by K9STH and KI4IUA; filter table).
+- Heathkit-Radios (groups.io), "sb-401 lmo" thread, messages 22979–22994 (CT7AWB, WB9UVJ), Apr.–May 2026.
 - G3OOU, *Heathkit SB Line — Where Next?*, qsl.net/g3oou.
 - RigPix, SB-401 entry (dates, final tubes).
 - *Heathkit-Radios* (groups.io) — see §11.
@@ -397,8 +422,13 @@ LINEAR RELAY grounds on transmit; ALC INPUT takes ALC voltage from the amplifier
 
 **Sources not read for Rev. 1:**
 
-- **groups.io Heathkit-Radios.** The group's pages sit behind a bot check, so the search interface could not be read. Posts need to be exported or pasted by a member.
-- **antiqueradios.com t=422212** returned HTTP 403.
+- **groups.io Heathkit-Radios** (partly). The group's pages sit behind a bot check, so only two threads supplied by the owner were read. The "sb-401 lmo" thread is used; the other thread was a "first Heathkit" reminiscence with no technical content (one poster, WA4FJC, mentions the SB-401 as his last big kit). The rest of the group's SB-401 history has not been searched.
+- **antiqueradios.com t=422212** returned HTTP 403 and has not been supplied.
 - **EEVblog:** search found no SB-401 thread, and nothing relevant has been added.
+
+**Source conflicts found in Rev. 1.1:**
+
+- **LMO part number** (110-32 vs 110-40) and the SB-301's 110-40 tube type disagree between Kembel's table, the Heath manual, AF6C and the SB-301 plan (§2.2). The SB-401's own manual says **6BZ6**, which agrees with AF6C. Treat the LMO label as the authority.
+- Kembel's HW-101/SB-10x guide is for different rigs; its procedures are adapted here only where the circuit is shared (LMO, crystal filter, bandpass coupler, SB-line practice).
 
 **Corrections to earlier assumptions:** *None yet.* Rev. 2 should list them, as the SB-301 plan did.
